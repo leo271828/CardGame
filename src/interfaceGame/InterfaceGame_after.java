@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import card_game.*;
 
-public class InterfaceGame_after extends JFrame implements ActionListener,InterfaceGame_Arguments  {
+public class InterfaceGame_after extends JFrame implements ActionListener  {
 
 	protected static final int[] cardset = { 1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,9,9,9, 10,11, 12, 12,13,13, 13, 13 };// 43
 	protected static final player_rule player = new player();

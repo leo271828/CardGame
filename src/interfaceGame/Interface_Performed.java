@@ -50,7 +50,6 @@ public class Interface_Performed {
 				end.setSize(800, 100);
 				end.setFont(new java.awt.Font("Dialog", 1, 40));
 				end.setLocation(500, 100);// 310
-				InterfaceGame_Arguments.getLayeredPane().add(end, 10000);
 				end.setVisible(true);
 				/*
 				 * try { Thread.sleep(3000); System.exit(0); } catch (InterruptedException e1) {
@@ -62,7 +61,6 @@ public class Interface_Performed {
 				end.setSize(800, 100);
 				end.setFont(new java.awt.Font("Dialog", 1, 40));
 				end.setLocation(500, 100);
-				this.getLayeredPane().add(end, 10000);
 				end.setVisible(true);/*
 										 * try { Thread.sleep(3000); System.exit(0); } catch (InterruptedException e1) {
 										 * e1.printStackTrace(); } System.exit(0);
@@ -81,20 +79,17 @@ public class Interface_Performed {
 				;
 				// this.getLayeredPane().add(hpPlayerLabel, 1000000);
 				InterfaceGame_Arguments.hpPlayerLabel.setVisible(true);
-				String y = "Com hp: " + String.valueOf(cpu.gethp());
+				String y = "Com hp: " + String.valueOf(InterfaceGame_Arguments.cpu.gethp());
 				InterfaceGame_Arguments.hpComLabel.setText(y);
 				// this.getLayeredPane().add(hpComLabel, 1000000);
 				InterfaceGame_Arguments.hpComLabel.setVisible(true);
 				InterfaceGame_Arguments.roundResult.setEditable(false);
 			}
-			this.getLayeredPane().add(InterfaceGame_Arguments.roundResult, 10000000);
 			InterfaceGame_Arguments.roundResult.setSize(200, 250);
 			InterfaceGame_Arguments.roundResult.setLocation(500, 200);
 			InterfaceGame_Arguments.roundResult.setFont(new java.awt.Font("Dialog", 1, 20));
 			InterfaceGame_Arguments.roundResult.setBackground(Color.LIGHT_GRAY);
 
-			this.getLayeredPane().add(InterfaceGame_Arguments.reset, 10000000);
-			InterfaceGame_Arguments.reset.addActionListener(this);
 			InterfaceGame_Arguments.reset.setActionCommand(Action.RESET.name());
 			InterfaceGame_Arguments.reset.setSize(150, 40);
 			InterfaceGame_Arguments.reset.setLocation(525, 520);
@@ -112,13 +107,10 @@ public class Interface_Performed {
 			InterfaceGame_Arguments.cardPic[2].setVisible(false);
 			InterfaceGame_Arguments.comPicIn.setVisible(false);
 			InterfaceGame_Arguments.background2.setVisible(false);
-			this.getLayeredPane().add(InterfaceGame_Arguments.hpPlayerLabel, 100000000);
 			InterfaceGame_Arguments.hpPlayerLabel.setVisible(true);
-			this.getLayeredPane().add(InterfaceGame_Arguments.hpComLabel, 100000000);
 			InterfaceGame_Arguments.hpComLabel.setVisible(true);
 			InterfaceGame_Arguments.reset.setVisible(false);
 			InterfaceGame_Arguments.fight.setVisible(false);
-			HandCardsView();
 
 		}
 	}
@@ -134,8 +126,6 @@ public class Interface_Performed {
 		InterfaceGame_Arguments.background.setVisible(false);
 		chosen.setLocation(150, 150);
 		chosen.setVisible(true);
-		add(InterfaceGame_Arguments.fight);
-		InterfaceGame_Arguments.fight.addActionListener(this);
 		InterfaceGame_Arguments.fight.setActionCommand(Action.FIGHT.name());
 		InterfaceGame_Arguments.fight.setSize(150, 40);
 		InterfaceGame_Arguments.fight.setLocation(525, 520);
@@ -150,7 +140,6 @@ public class Interface_Performed {
 		InterfaceGame_Arguments.comPicIn.setSize(comPic.getIconWidth(), comPic.getIconHeight());
 		InterfaceGame_Arguments.comPicIn.setLocation(850, 150);
 		InterfaceGame_Arguments.comPicIn.setVisible(true);
-		add(InterfaceGame_Arguments.comPicIn);
 		ImageIcon backgroundPic2 = new ImageIcon("src/interfaceGame/background2.png");
 		backgroundPic2.setImage(backgroundPic2.getImage().getScaledInstance(1200, 630, Image.SCALE_DEFAULT));
 		InterfaceGame_Arguments.background2 = new JLabel(backgroundPic2);
