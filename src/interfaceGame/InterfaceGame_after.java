@@ -6,20 +6,17 @@ import java.util.Random;
 
 import javax.swing.*;
 
-import card_game.Field;
-import card_game.cpu;
-import card_game.player;
-import card_game.player_rule;
+import card_game.*;
 
-public class InterfaceGame extends JFrame implements ActionListener {
-	// 建構子
-	private static int[] cardset = { 1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,9,9,9, 10,11, 12, 12,13,13, 13, 13 };// 43
-	private static player_rule player = new player();
-	private static player_rule cpu = new cpu();
-	private static Field field = new Field();
-	private static Random random = new Random();
+public class InterfaceGame_after extends JFrame implements ActionListener,InterfaceGame_Arguments  {
+
+	protected static final int[] cardset = { 1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,9,9,9, 10,11, 12, 12,13,13, 13, 13 };// 43
+	protected static final player_rule player = new player();
+	protected static final player_rule cpu = new cpu();
+	protected static final Field field = new Field();
+	protected static final Random random = new Random();
 	// 設立顯示所需變數
-	private int card1, card2, card3, cardCom;
+	protected int card1, card2, card3, cardCom; //這傢伙會動
 	JTextArea roundResult = new JTextArea();
 	// 顯示背景畫面
 	protected JLabel background = new JLabel();
@@ -42,8 +39,8 @@ public class InterfaceGame extends JFrame implements ActionListener {
 	protected enum Action {
 		CARDLEFT, CARDMIDDLE, CARDRIGHT, RESET, FIGHT
 	}
-
-	public InterfaceGame(int card1, int card2, int card3, int cardCom, int hpPlayer, int hpCom) {
+	
+	public InterfaceGame_after(int card1, int card2, int card3, int cardCom, int hpPlayer, int hpCom) {//建構子
 		this.card1 = card1;
 		this.card2 = card2;
 		this.card3 = card3;
@@ -55,11 +52,13 @@ public class InterfaceGame extends JFrame implements ActionListener {
 		//JLabel hpPlayerTrans = new JLabel("Player HP " + hpPlayer);// 傳入的初始血量
 		this.hpPlayerLabel.setText("Player HP " + hpPlayer);// = hpPlayerTrans;
 		this.hpComLabel.setText("Com HP " + hpCom); 
-		gameInterface();
-		
+		//JLabel roundCountTrans = new JLabel("Round " + Integer.toString(round));
+		//this.roundCount = roundCountTrans;
+		HandCardsView();
 	}
+	
 	// 手牌畫面
-	protected void gameInterface() {
+	protected void HandCardsView() {
 		roundResult.setVisible(false);
 		// 視窗大小設定
 		setSize(1200, 630);// 1700,900
@@ -106,7 +105,7 @@ public class InterfaceGame extends JFrame implements ActionListener {
 		// 放入背景圖片
 		ImageIcon backgroundPic = new ImageIcon("src/interfaceGame/background.png");
 		backgroundPic.setImage(backgroundPic.getImage().getScaledInstance(1200, 630, Image.SCALE_DEFAULT));
-//		background.setLocation(0,0);
+		//background.setLocation(0,0);
 		background = new JLabel(backgroundPic);
 		background.setSize(backgroundPic.getIconWidth(), backgroundPic.getIconHeight());
 		//this.getLayeredPane().add(background, Integer.MIN_VALUE);
@@ -128,27 +127,27 @@ public class InterfaceGame extends JFrame implements ActionListener {
 			field.round();
 			player.setCard(card1);
 			//洗牌
-			draw_cards(player.getcp(),0);
+			DrawCards(player.getcp(),0);
 			player.set_new_Card(0);
-			resultInterface(cardPic[0], cardCom, card1);
+			BattleView(cardPic[0], cardCom, card1);
 			this.card1 = player.get_new_Card();
 		}
 		else if (e.getActionCommand() == Action.CARDMIDDLE.name()) {
 			field.round();
 			player.setCard(card2);
 			//洗牌
-			draw_cards(player.getcp(),1);//洗牌
+			DrawCards(player.getcp(),1);//洗牌
 			player.set_new_Card(1);
-			resultInterface(cardPic[1], cardCom, card2);
+			BattleView(cardPic[1], cardCom, card2);
 			this.card2 = player.get_new_Card();
 		} 
 		else if (e.getActionCommand() == Action.CARDRIGHT.name()) {
 			field.round();
 			player.setCard(card3);
 			//洗牌
-			draw_cards(player.getcp(),2);
+			DrawCards(player.getcp(),2);
 			player.set_new_Card(2);
-			resultInterface(cardPic[2], cardCom, card3);
+			BattleView(cardPic[2], cardCom, card3);
 			this.card3 = player.get_new_Card();
 		}
 		// 計算回合數
@@ -236,13 +235,13 @@ public class InterfaceGame extends JFrame implements ActionListener {
 			hpComLabel.setVisible(true);
 			reset.setVisible(false);
 			fight.setVisible(false);
-			gameInterface();
+			HandCardsView();
 
 		}
 	}
 
 	// 對戰畫面
-	protected void resultInterface(JButton chosen, int com, int card_num) {
+	protected void BattleView(JButton chosen, int com, int card_num) {
 		roundResult.setVisible(false);
 		cardPic[0].setVisible(false);
 		cardPic[1].setVisible(false);
@@ -278,18 +277,18 @@ public class InterfaceGame extends JFrame implements ActionListener {
 		cpu.setCard(cardCom);
 		player.affect(card_num, player);
 		cpu.affect(com, cpu);
-		attack();
+		Attack();
 		this.cardCom = cardset[random.nextInt(cardset.length)];
 
 	}
-
-	public static void draw_cards(int[] a, int card_pos) { // 抽牌的動作 丟入的參數為剛剛出的牌 int card_pos 為棄牌的位置
+ 
+	public static final void DrawCards(int[] a, int card_pos) { // 抽牌的動作 丟入的參數為剛剛出的牌 int card_pos 為棄牌的位置
 		a[card_pos] = cardset[random.nextInt(cardset.length)];
 		//int b = a[card_pos];
 		//System.out.println(b);
 	}
 
-	public static void special() {
+	public static final void Special() {
 		// 判定特殊卡牌 也就是(8號以上)兩張陷阱卡和一些擴充的東西
 		if (player.getCard() == 11)
 			cpu.sethp(0);
@@ -321,8 +320,8 @@ public class InterfaceGame extends JFrame implements ActionListener {
 
 	}
 
-	public static void attack() {
-		special();
+	public static final void Attack() {
+		Special();
 		// 計算本回合玩家和電腦所造成的傷害
 		int cpu_damage = player.getAtk() - cpu.getDef();
 		int player_damage = cpu.getAtk() - player.getDef();
