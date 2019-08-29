@@ -15,7 +15,7 @@ public class play_game {
 	public static void main(String[] args) {
 		Scanner key = new Scanner(System.in);
 
-		ArrayList cards_player = new ArrayList(3);// 玩家手上牌組
+		ArrayList cards_player = new ArrayList(3);// 玩家手上的牌組
 		for (int i = 0; i < 3; i++)
 			cards_player.add(cardset[random.nextInt(cardset.length)]);// 選3張牌
 		// 遊戲開始
