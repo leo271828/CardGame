@@ -8,9 +8,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import interfaceGame.InterfaceGame_after.Action;
 
-public class Interface_Performed {
+public class Interface_Performed extends InterfaceGame_Arguments{
 
 	public static Random random = new Random();
 	// button反應 選擇出哪張牌
