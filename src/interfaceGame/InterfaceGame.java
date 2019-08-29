@@ -55,11 +55,7 @@ public class InterfaceGame extends JFrame implements ActionListener {
 		//JLabel hpPlayerTrans = new JLabel("Player HP " + hpPlayer);// 傳入的初始血量
 		this.hpPlayerLabel.setText("Player HP " + hpPlayer);// = hpPlayerTrans;
 		this.hpComLabel.setText("Com HP " + hpCom); 
-		//JLabel roundCountTrans = new JLabel("Round " + Integer.toString(round));
-		//this.roundCount = roundCountTrans;
 		gameInterface();
-		
-		
 		
 	}
 	// 手牌畫面
